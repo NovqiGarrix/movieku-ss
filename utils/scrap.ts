@@ -59,6 +59,9 @@ export default async function scrap(url: string): Promise<void> {
         console.log(`✅ DELETING ALL PREVIOUS SCREENSHOTS 🚀`);
         await Deno.remove("./screenshots", { recursive: true });
 
+        console.log(`✅ CREATING NEW SCREENSHOTS FOLDER 🚀`);
+        await Deno.mkdir("./screenshots");
+
     } catch (error) {
         console.error(error, "Scrap error");
         throw new Error(error.message);
