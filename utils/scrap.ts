@@ -26,12 +26,15 @@ export default async function scrap(url: string): Promise<void> {
 
             await page.goto(url, { waitUntil: "networkidle2", timeout: 60000 });
 
-            const filename = `./screenshots/${url.split('/')[4]}`;
 
-            await page.screenshot({ path: `${filename}.png` });
+            const filename = url.split('/')[4];
+            const filepath = `./screenshots/${filename}.png`;
+
+            await page.screenshot({ path: filepath });
 
             const formData = new FormData();
-            const file = new File([`${filename}.png`], filename, { type: "image/png" });
+            const f = await Deno.readFile(filepath);
+            const file = new File([f], `${filename}.png`);
 
             formData.append("file", file);
 
