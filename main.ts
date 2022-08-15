@@ -3,13 +3,13 @@ import scrap from "./utils/scrap.ts";
 
 try {
 
+    serve(() => new Response("OK"));
+
     const moviesURL = "https://srsku.vercel.app/movies/trending";
     await scrap(moviesURL);
 
     const seriesURL = "https://srsku.vercel.app/series/trending";
     await scrap(seriesURL);
-
-    serve(() => new Response("OK"));
 
     Deno.exit(0);
 } catch (error) {
